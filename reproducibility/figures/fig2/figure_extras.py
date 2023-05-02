@@ -3,6 +3,8 @@ import os
 import pickle
 from logging import Logger
 from pathlib import Path
+from astropy import units as u
+from astropy.stats import circstd
 
 import hydra
 import matplotlib.pyplot as plt
@@ -48,8 +50,9 @@ def plots(conf: DictConfig, logger: Logger) -> None:
         plots(conf, logger)
     """
 
-    time_dev_list = []
-    mag_dev_list = []
+    time_cov_list = []
+    mag_cov_list = []
+    angle_cov_list = []
     names = []
     for data_model in conf.reports.model_summary.summarize:
         ##################
@@ -61,54 +64,71 @@ def plots(conf: DictConfig, logger: Logger) -> None:
 
         with open(pyrovelocity_data_path, "rb") as f:
             posterior_samples = pickle.load(f)
+
+        cell_angles = posterior_samples["embeds_angle"] / np.pi * 180
+        cell_angles_mean = cell_angles.mean(axis=0)
+        angles_std = circstd(cell_angles * u.deg, method="angular", axis=0)
+        cell_angles_cov = angles_std / cell_angles_mean
+        angle_cov_list.append(cell_angles_cov)
+
         cell_magnitudes = np.sqrt(
             (posterior_samples["vector_field_posterior_samples"] ** 2).sum(axis=-1)
         )
         cell_magnitudes_mean = cell_magnitudes.mean(axis=-2)
         # cell_magnitudes_mean = np.sqrt((posterior_samples["vector_field_posterior_mean"] ** 2).sum(axis=-1))
         cell_magnitudes_std = cell_magnitudes.std(axis=-2)
-        cell_magnitudes_deviance = cell_magnitudes_std / cell_magnitudes_mean
+        cell_magnitudes_cov = cell_magnitudes_std / cell_magnitudes_mean
 
         cell_time_mean = posterior_samples["cell_time"].mean(0).flatten()
         cell_time_std = posterior_samples["cell_time"].std(0).flatten()
-        cell_time_deviance = cell_time_std / cell_time_mean
-        time_dev_list.append(cell_time_deviance)
-        mag_dev_list.append(cell_magnitudes_deviance)
-        names += [data_model] * len(cell_time_deviance)
+        cell_time_cov = cell_time_std / cell_time_mean
+        time_cov_list.append(cell_time_cov)
+        mag_cov_list.append(cell_magnitudes_cov)
+        names += [data_model] * len(cell_time_cov)
 
-    time_dev_list = np.hstack(time_dev_list)
-    mag_dev_list = np.hstack(mag_dev_list)
+    time_cov_list = np.hstack(time_cov_list)
+    mag_cov_list = np.hstack(mag_cov_list)
+    angle_cov_list = np.hstack(angle_cov_list)
 
     metrics_df = pd.DataFrame(
         {
-            "time_deviance": time_dev_list,
-            "magnitude_deviance": mag_dev_list,
-            "dataset": names,
+            "time_coefficient_of_variation": time_cov_list,
+            "magnitude_coefficient_of_variation": mag_cov_list,
+            "angle_coefficient_of_variation": angle_cov_list,
+            "dataset": names
         }
     )
     logger.info(metrics_df.head())
     shared_time_plot = conf.reports.figure2_extras.shared_time_plot
-    fig, ax = plt.subplots(1, 2)
-    fig.set_size_inches(9.6, 3.5)
+    fig, ax = plt.subplots(1, 3)
+    fig.set_size_inches(15.6, 3.5)
     order = ("pancreas_model2", "pbmc68k_model2")
-    sns.boxplot(x="dataset", y="time_deviance", data=metrics_df, ax=ax[0], order=order)
+    sns.boxplot(x="dataset", y="time_coefficient_of_variation", data=metrics_df, ax=ax[0], order=order)
     sns.boxplot(
-        x="dataset", y="magnitude_deviance", data=metrics_df, ax=ax[1], order=order
+        x="dataset", y="magnitude_coefficient_of_variation", data=metrics_df, ax=ax[1], order=order
+    )
+    sns.boxplot(
+        x="dataset", y="angle_coefficient_of_variation", data=metrics_df, ax=ax[2], order=order
     )
     pairs = [("pancreas_model2", "pbmc68k_model2")]
     time_annotator = Annotator(
-        ax[0], pairs, data=metrics_df, x="dataset", y="time_deviance", order=order
+        ax[0], pairs, data=metrics_df, x="dataset", y="time_coefficient_of_variation", order=order
     )
-    time_annotator.configure(test="Mann-Whitney", text_format="star", loc="outside")
+    time_annotator.configure(test="Mann-Whitney", text_format="star", loc="inside")
     time_annotator.apply_and_annotate()
     mag_annotator = Annotator(
-        ax[1], pairs, data=metrics_df, x="dataset", y="magnitude_deviance", order=order
+        ax[1], pairs, data=metrics_df, x="dataset", y="magnitude_coefficient_of_variation", order=order
     )
-    mag_annotator.configure(test="Mann-Whitney", text_format="star", loc="outside")
+    mag_annotator.configure(test="Mann-Whitney", text_format="star", loc="inside")
     mag_annotator.apply_and_annotate()
 
-    # ax[1].set_ylim(0, 3)
-    print(shared_time_plot)
+    #angle_annotator = Annotator(
+    #    ax[2], pairs, data=metrics_df, x="dataset", y="angle_coefficient_of_variation", order=order
+    #)
+    #angle_annotator.configure(test="Mann-Whitney", text_format="star", loc="inside")
+    #angle_annotator.apply_and_annotate()
+    ax[2].set_ylim(-0.1, 0.1)
+
     fig.savefig(
         shared_time_plot,
         facecolor=fig.get_facecolor(),
@@ -134,6 +154,7 @@ def main(conf: DictConfig) -> None:
     )
     Path(conf.reports.figure2.path).mkdir(parents=True, exist_ok=True)
 
+    print(conf.reports.figure2_extras.shared_time_plot)
     if os.path.isfile(conf.reports.figure2_extras.shared_time_plot):
         logger.info(
             f"\n\nFigure 2 outputs already exist:\n\n"

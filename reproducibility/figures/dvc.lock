@@ -2075,8 +2075,8 @@ stages:
     cmd: python fig2/figure_extras.py reports.model_summary.summarize=[pancreas_model2,pbmc68k_model2]
     deps:
     - path: fig2/figure_extras.py
-      md5: e40ad67e697be6dddb77c73719844a38
-      size: 6017
+      md5: ebb3e5ecdbe8930a0cd0b9f4af4f8979
+      size: 8901
     - path: models/pancreas_model2/pyrovelocity.pkl
       md5: e47389f48189529518dbb8dfc88959c2
       size: 112472656
@@ -2101,8 +2101,8 @@ stages:
             vector_field_plot: reports/fig2/fig2_pancreas_vector_field.pdf
     outs:
     - path: reports/fig2/fig2_pancreas_pbmc_uncertainties_comparison.pdf
-      md5: d06b622119c38d1c820c5bad7ab7544a
-      size: 194356
+      md5: 96b95db9d262cae8dfae37e2f0174831
+      size: 270423
   summarize_pbmc10k_model2:
     cmd: python summarize.py reports.model_summary.summarize=[pbmc10k_model2]
     deps:

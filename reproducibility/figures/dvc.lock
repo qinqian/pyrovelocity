@@ -869,22 +869,22 @@ stages:
       md5: bbff19677beed1c7cf3766506f391723
       size: 12359084
     - path: reports/pancreas_model2/rainbow.pdf
-      md5: df74ea8ee53e666e363d081487ab4327
+      md5: 7a53b9323cc3cdf1d3d6548eeed2ce30
       size: 674523
     - path: reports/pancreas_model2/rainbow.pdf.png
       md5: a053e9fbf0755a4fa529e92e3ef03f45
       size: 1592710
     - path: reports/pancreas_model2/shared_time.pdf
-      md5: 0477f4a97952a37f00d7461bb6dd253a
+      md5: ce3dcb45542b7588bc679de144979410
       size: 470124
     - path: reports/pancreas_model2/vector_field.pdf
-      md5: 81195f34afd9410e03c51fd70db202cc
+      md5: 03872d0d39d69a30210bfa0ad6ee2c4c
       size: 397647
     - path: reports/pancreas_model2/vector_field.pdf.png
       md5: 8e8256cf0b1ba9b5aaa88ead3b60d5f7
       size: 697784
     - path: reports/pancreas_model2/volcano.pdf
-      md5: bc3a9bf2aab2b24fb9d604fa10d4cda6
+      md5: e48b397ef94856477bdf88ef96fe7f26
       size: 20347
   summarize_pbmc68k_model1:
     cmd: python summarize.py reports.model_summary.summarize=[pbmc68k_model1]
@@ -950,22 +950,22 @@ stages:
       md5: ab5d52e865016970c4ce4d119b8a7d76
       size: 36404588
     - path: reports/pbmc68k_model1/rainbow.pdf
-      md5: a3edbdb1bf417aa07bb5e4f0f2e55691
+      md5: c543ea47f4de8dbcb5f69b36cc7f9e8a
       size: 11048112
     - path: reports/pbmc68k_model1/rainbow.pdf.png
       md5: 44c9921caa21c6bd8cb97ed8a56c88e7
       size: 1331117
     - path: reports/pbmc68k_model1/shared_time.pdf
-      md5: d9d55d71e4fea13d4a784b5ce734a6dc
+      md5: c81270a94444a46f74fad37a74c3fce3
       size: 360278
     - path: reports/pbmc68k_model1/vector_field.pdf
-      md5: 10bf1d2207893669109e7915a5b2b83a
+      md5: 731ce527640d3ce1b1163871b0203d33
       size: 1034005
     - path: reports/pbmc68k_model1/vector_field.pdf.png
       md5: 59d41916ab64cc94a094be66cf3509f6
       size: 1187895
     - path: reports/pbmc68k_model1/volcano.pdf
-      md5: 7b12df92035abed3fa07a07af94c021c
+      md5: b5b637caf7fdd36dd18d687fc42b1c16
       size: 23088
   summarize_pbmc68k_model2:
     cmd: python summarize.py reports.model_summary.summarize=[pbmc68k_model2]
@@ -1031,22 +1031,22 @@ stages:
       md5: ab5d52e865016970c4ce4d119b8a7d76
       size: 36404588
     - path: reports/pbmc68k_model2/rainbow.pdf
-      md5: 1254070a4db2d0a0cf632a8f3f76ca39
+      md5: 0d40aeac01fe73c8d5072a46e5e29bde
       size: 11386855
     - path: reports/pbmc68k_model2/rainbow.pdf.png
       md5: 8b5fc5391a9545c3c29eb2c41f502456
       size: 2312149
     - path: reports/pbmc68k_model2/shared_time.pdf
-      md5: 5e999570596a7e6f82963f81715e7117
+      md5: 88209ac0bc941be2723294747eb3de74
       size: 375064
     - path: reports/pbmc68k_model2/vector_field.pdf
-      md5: 8c6bad2a222968766975fbb66953d7aa
+      md5: a5b8b3181440e245653112fef46ddced
       size: 1034156
     - path: reports/pbmc68k_model2/vector_field.pdf.png
       md5: 84902b91f8f2bcc530abb3c3c09ba1a4
       size: 1183674
     - path: reports/pbmc68k_model2/volcano.pdf
-      md5: 17cdfcb647f574efaf10a225da98b834
+      md5: e4a40d6d8931e5943dcacecc9aa8f70a
       size: 22242
   summarize_pons_model1:
     cmd: python summarize.py reports.model_summary.summarize=[pons_model1]
@@ -1112,22 +1112,22 @@ stages:
       md5: b17eb7eaadc357d32ae68e3c30ee33f4
       size: 20173882
     - path: reports/pons_model1/rainbow.pdf
-      md5: 2e4fc245c702b63d91aaf005a75f9bbe
+      md5: e1f9e40357e705667cbe77c29e113258
       size: 1055211
     - path: reports/pons_model1/rainbow.pdf.png
       md5: 5849a1d785f56ad9945bef447f1ef384
       size: 988477
     - path: reports/pons_model1/shared_time.pdf
-      md5: 6bf088e938dd45c29042283ac7ab10a7
+      md5: f36b6764ad0b819aa9c3331241185fcf
       size: 542703
     - path: reports/pons_model1/vector_field.pdf
-      md5: 184b443572a1a3f57084efe000299442
+      md5: 5589924955925ae1d2e953f71a20ae94
       size: 376801
     - path: reports/pons_model1/vector_field.pdf.png
       md5: f38be7261e92a76819e7755e337a54c4
       size: 789159
     - path: reports/pons_model1/volcano.pdf
-      md5: 930397547610fde033091bdf1116661d
+      md5: 1655357b99991f142981a1bc5e298834
       size: 20392
   summarize_pons_model2:
     cmd: python summarize.py reports.model_summary.summarize=[pons_model2]
@@ -1193,22 +1193,22 @@ stages:
       md5: b17eb7eaadc357d32ae68e3c30ee33f4
       size: 20173882
     - path: reports/pons_model2/rainbow.pdf
-      md5: ca9a8d144be81bf86d933e3ee18f480e
+      md5: ed196ef5961b0f6d7eeb545e1969c44d
       size: 1079005
     - path: reports/pons_model2/rainbow.pdf.png
       md5: bad7afd11e2404c13ce0d65348de117b
       size: 960916
     - path: reports/pons_model2/shared_time.pdf
-      md5: fbcc161d241fb14c98a2cf2bf18899cb
+      md5: b58760afa4fb729f69b067d89fa8a4bb
       size: 559935
     - path: reports/pons_model2/vector_field.pdf
-      md5: 73b61e773ad1655303fcb58052b22894
+      md5: bcfe8f98d89e5ba201ecb7beba311855
       size: 377120
     - path: reports/pons_model2/vector_field.pdf.png
       md5: 2dbac0604c27177de808c900e34c1e2d
       size: 799077
     - path: reports/pons_model2/volcano.pdf
-      md5: 645de3cefb5e4c8a4c1b90788e0690fb
+      md5: 4def90360bec0cb605c69b5bbddc3f1b
       size: 21547
   data_download_simulate:
     cmd: python data_download.py data_external.sources=[simulate] data_external.simulate.download=[medium]
@@ -1457,22 +1457,22 @@ stages:
       md5: 12e544a30c6d793d04f0a48245d309c8
       size: 5068789
     - path: reports/medium_model1/rainbow.pdf
-      md5: 97c79f59589eb4b739ebe79b1d684970
+      md5: 5a4d4a8b433b905caef46bc649d20796
       size: 415343
     - path: reports/medium_model1/rainbow.pdf.png
       md5: e2a988c1b94ccac347654758176abb1c
       size: 709724
     - path: reports/medium_model1/shared_time.pdf
-      md5: 4f99b9e43cb4ac2a6570bd8fcd9d01ce
+      md5: 41abd22ba8a40f9fce4e90415a362318
       size: 192600
     - path: reports/medium_model1/vector_field.pdf
-      md5: f82026c2b54d5349fa70f90581f21841
+      md5: 9f2b1ea6d26498af9afa25d2d427e08f
       size: 202635
     - path: reports/medium_model1/vector_field.pdf.png
       md5: 9671b4e3d88e3da48e7d53fd3113d3e9
       size: 501939
     - path: reports/medium_model1/volcano.pdf
-      md5: 88f53c508f7b64e2d456874d75c367dd
+      md5: 8f54b82aed28f9fca02663f388607974
       size: 20552
   summarize_simulate_model2:
     cmd: python summarize.py reports.model_summary.summarize=[simulate_model2]
@@ -1538,22 +1538,22 @@ stages:
       md5: 12e544a30c6d793d04f0a48245d309c8
       size: 5068789
     - path: reports/medium_model2/rainbow.pdf
-      md5: 64ada4f910308d33eb4832d8835e9bb2
+      md5: 697dc3d9e4ad1227fa823e59753caf02
       size: 463594
     - path: reports/medium_model2/rainbow.pdf.png
       md5: e732a7a5a4fb3f7cf695a7883b6563f7
       size: 993907
     - path: reports/medium_model2/shared_time.pdf
-      md5: 06c941d026d1edf709a37f0f4c8b4e96
+      md5: d106d8897110e269f92a8febff051f3d
       size: 204658
     - path: reports/medium_model2/vector_field.pdf
-      md5: 65415971c12e232809c144d38833ee25
+      md5: 54a31604704a981ab523b80908618902
       size: 204699
     - path: reports/medium_model2/vector_field.pdf.png
       md5: 2b46c0b6d0c7aec6b807e0c89635362a
       size: 506131
     - path: reports/medium_model2/volcano.pdf
-      md5: 35f1ec3bd008d9b04fdd6f0e330f0c3a
+      md5: 1e45ea2812db089f2d46385d33bb3d0d
       size: 19644
   preprocess_larry:
     cmd: python preprocess.py data_external.sources=[pyrovelocity] data_external.pyrovelocity.process=[larry]
@@ -2085,7 +2085,7 @@ stages:
       size: 724170924
     outs:
     - path: reports/fig2/fig2_pancreas_pbmc_uncertainties_comparison.pdf
-      md5: 96b95db9d262cae8dfae37e2f0174831
+      md5: ed843bde784d91efb5879fc9b978c7e3
       size: 270423
   summarize_pbmc10k_model2:
     cmd: python summarize.py reports.model_summary.summarize=[pbmc10k_model2]
@@ -2151,22 +2151,22 @@ stages:
       md5: cd6cca4562de776a573e3ca3ebfc80c9
       size: 37004116
     - path: reports/pbmc10k_model2/rainbow.pdf
-      md5: d181428d1b136e6b210fedfec5202002
+      md5: b1150e3f7e0b7b95e8e1575b5d172b6d
       size: 2033844
     - path: reports/pbmc10k_model2/rainbow.pdf.png
       md5: 02d18afa1eb81e1fdc36c26386bb8212
       size: 1644664
     - path: reports/pbmc10k_model2/shared_time.pdf
-      md5: e34a73cd4c474ef009193567c65d9df6
+      md5: 41ed82312b29c75061d6b9a0afc3abf0
       size: 390684
     - path: reports/pbmc10k_model2/vector_field.pdf
-      md5: 25ac8f456287c34d76d0712fa5df6d5d
+      md5: fca39f3a91568afc8dda84a22bb729d9
       size: 504868
     - path: reports/pbmc10k_model2/vector_field.pdf.png
       md5: 8273b20bf64e8f83260ce59330614dae
       size: 994577
     - path: reports/pbmc10k_model2/volcano.pdf
-      md5: 2d644512db24c76ffece2486e2aa074c
+      md5: 4241a9473eafe2a17cc78b57cd50cbb7
       size: 21847
   data_download_pbmc10k:
     cmd: echo "Reference pbmc10k"

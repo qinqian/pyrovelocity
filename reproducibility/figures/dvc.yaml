@@ -317,28 +317,28 @@ stages:
       - ${model_training.simulate_model2.pyrovelocity_data_path}
         # persist: true
 
-  train_pancreas_model1:
-    cmd: /usr/bin/time -v python train.py model_training.train=[pancreas_model1]
-    deps:
-      - train.py
-      - ${model_training.pancreas_model1.input_data_path}
-    params:
-      - config.yaml:
-          - model_training.pancreas_model1
-    metrics:
-      - ${model_training.pancreas_model1.metrics_path}:
-          cache: false
-    outs:
-      - ${model_training.pancreas_model1.run_info_path}:
-          cache: false
-      - ${model_training.pancreas_model1.training_parameters.loss_plot_path}
-        # persist: true
-      - ${model_training.pancreas_model1.trained_data_path}
-        # persist: true
-      - ${model_training.pancreas_model1.model_path}
-        # persist: true
-      - ${model_training.pancreas_model1.pyrovelocity_data_path}
-        # persist: true
+        #train_pancreas_model1:
+        #  cmd: /usr/bin/time -v python train.py model_training.train=[pancreas_model1]
+        #  deps:
+        #    - train.py
+        #    - ${model_training.pancreas_model1.input_data_path}
+        #  params:
+        #    - config.yaml:
+        #        - model_training.pancreas_model1
+        #  metrics:
+        #    - ${model_training.pancreas_model1.metrics_path}:
+        #        cache: false
+        #  outs:
+        #    - ${model_training.pancreas_model1.run_info_path}:
+        #        cache: false
+        #    - ${model_training.pancreas_model1.training_parameters.loss_plot_path}
+        #      # persist: true
+        #    - ${model_training.pancreas_model1.trained_data_path}
+        #      # persist: true
+        #    - ${model_training.pancreas_model1.model_path}
+        #      # persist: true
+        #    - ${model_training.pancreas_model1.pyrovelocity_data_path}
+        #      # persist: true
 
   train_pancreas_model2:
     cmd: /usr/bin/time -v python train.py model_training.train=[pancreas_model2]
@@ -363,25 +363,25 @@ stages:
       - ${model_training.pancreas_model2.pyrovelocity_data_path}
         # persist: true
 
-  plot_pancreas_model1:
-    cmd: python fig2/fig2_pancreas_plot.py
-    deps:
-      - fig2/fig2_pancreas_plot.py
-      - ${model_training.pancreas_model1.trained_data_path}
-      - ${model_training.pancreas_model1.pyrovelocity_data_path}
-    params:
-      - config.yaml:
-          - model_training.pancreas_model1
-          - reports.figure2.pancreas_model1
-    outs:
-      - ${reports.figure2.pancreas_model1.shared_time_plot}
-        # persist: true
-      - ${reports.figure2.pancreas_model1.volcano_plot}
-        # persist: true
-      - ${reports.figure2.pancreas_model1.rainbow_plot}
-        # persist: true
-      - ${reports.figure2.pancreas_model1.vector_field_plot}
-        # persist: true
+        #plot_pancreas_model1:
+        #  cmd: python fig2/fig2_pancreas_plot.py
+        #  deps:
+        #    - fig2/fig2_pancreas_plot.py
+        #    - ${model_training.pancreas_model1.trained_data_path}
+        #    - ${model_training.pancreas_model1.pyrovelocity_data_path}
+        #  params:
+        #    - config.yaml:
+        #        - model_training.pancreas_model1
+        #        - reports.figure2.pancreas_model1
+        #  outs:
+        #    - ${reports.figure2.pancreas_model1.shared_time_plot}
+        #      # persist: true
+        #    - ${reports.figure2.pancreas_model1.volcano_plot}
+        #      # persist: true
+        #    - ${reports.figure2.pancreas_model1.rainbow_plot}
+        #      # persist: true
+        #    - ${reports.figure2.pancreas_model1.vector_field_plot}
+        #      # persist: true
 
   train_pbmc68k_model1:
     cmd: /usr/bin/time -v python train.py model_training.train=[pbmc68k_model1]
@@ -590,25 +590,25 @@ stages:
       - ${model_training.pbmc10k_model2.pyrovelocity_data_path}
         # persist: true
 
-  figure2:
-    cmd: python fig2/figure.py
-    deps:
-      - fig2/figure.py
-      - ${model_training.pancreas_model1.trained_data_path}
-      - ${model_training.pancreas_model1.pyrovelocity_data_path}
-      - ${model_training.pbmc68k_model1.trained_data_path}
-      - ${model_training.pbmc68k_model1.pyrovelocity_data_path}
-    params:
-      - config.yaml:
-          - reports.figure2
-    outs:
-      - ${reports.figure2.tif_path}
-        # persist: true
-      - ${reports.figure2.svg_path}
-        # persist: true
-      - ${reports.figure2.biomarker_selection_path}
-      - ${reports.figure2.biomarker_phaseportrait_path}
-      - ${reports.figure2.uncertainty_param_plot_path}
+        #figure2:
+        #  cmd: python fig2/figure.py
+        #  deps:
+        #    - fig2/figure.py
+        #    - ${model_training.pancreas_model1.trained_data_path}
+        #    - ${model_training.pancreas_model1.pyrovelocity_data_path}
+        #    - ${model_training.pbmc68k_model1.trained_data_path}
+        #    - ${model_training.pbmc68k_model1.pyrovelocity_data_path}
+        #  params:
+        #    - config.yaml:
+        #        - reports.figure2
+        #  outs:
+        #    - ${reports.figure2.tif_path}
+        #      # persist: true
+        #    - ${reports.figure2.svg_path}
+        #      # persist: true
+        #    - ${reports.figure2.biomarker_selection_path}
+        #    - ${reports.figure2.biomarker_phaseportrait_path}
+        #    - ${reports.figure2.uncertainty_param_plot_path}
 
   figure2_extras:
     cmd: python fig2/figure_extras.py reports.model_summary.summarize=[pancreas_model2,pbmc68k_model2]
@@ -616,9 +616,6 @@ stages:
       - fig2/figure_extras.py
       - ${model_training.pancreas_model2.pyrovelocity_data_path}
       - ${model_training.pbmc68k_model2.pyrovelocity_data_path}
-    params:
-      - config.yaml:
-          - reports.figure2
     outs:
       - ${reports.figure2_extras.shared_time_plot}
 
@@ -687,29 +684,29 @@ stages:
         # persist: true
       - ${reports.model_summary.simulate_model2.shared_time_plot}
 
-  summarize_pancreas_model1:
-    cmd: python summarize.py reports.model_summary.summarize=[pancreas_model1]
-    deps:
-      - summarize.py
-      - ${model_training.pancreas_model1.trained_data_path}
-      - ${model_training.pancreas_model1.pyrovelocity_data_path}
-    params:
-      - config.yaml:
-          - model_training.pancreas_model1
-          - reports.model_summary.pancreas_model1
-    outs:
-      - ${reports.model_summary.pancreas_model1.dataframe_path}
-      - ${reports.model_summary.pancreas_model1.volcano_plot}
-        # persist: true
-      - ${reports.model_summary.pancreas_model1.rainbow_plot}
-        # persist: true
-      - ${reports.model_summary.pancreas_model1.vector_field_plot}
-        # persist: true
-      - ${reports.model_summary.pancreas_model1.rainbow_plot}.png
-        # persist: true
-      - ${reports.model_summary.pancreas_model1.vector_field_plot}.png
-        # persist: true
-      - ${reports.model_summary.pancreas_model1.shared_time_plot}
+        #summarize_pancreas_model1:
+        #  cmd: python summarize.py reports.model_summary.summarize=[pancreas_model1]
+        #  deps:
+        #    - summarize.py
+        #    - ${model_training.pancreas_model1.trained_data_path}
+        #    - ${model_training.pancreas_model1.pyrovelocity_data_path}
+        #  params:
+        #    - config.yaml:
+        #        - model_training.pancreas_model1
+        #        - reports.model_summary.pancreas_model1
+        #  outs:
+        #    - ${reports.model_summary.pancreas_model1.dataframe_path}
+        #    - ${reports.model_summary.pancreas_model1.volcano_plot}
+        #      # persist: true
+        #    - ${reports.model_summary.pancreas_model1.rainbow_plot}
+        #      # persist: true
+        #    - ${reports.model_summary.pancreas_model1.vector_field_plot}
+        #      # persist: true
+        #    - ${reports.model_summary.pancreas_model1.rainbow_plot}.png
+        #      # persist: true
+        #    - ${reports.model_summary.pancreas_model1.vector_field_plot}.png
+        #      # persist: true
+        #    - ${reports.model_summary.pancreas_model1.shared_time_plot}
 
   summarize_pancreas_model2:
     cmd: python summarize.py reports.model_summary.summarize=[pancreas_model2]

@@ -220,41 +220,41 @@ model_training:
       cell_specific_kinetics: null
       kinetics_num: 2
       loss_plot_path: models/medium_model2/loss_plot.png
-  pancreas_model1:
-    path: models/pancreas_model1
-    model_path: models/pancreas_model1/model
-    input_data_path: data/processed/pancreas_processed.h5ad
-    trained_data_path: models/pancreas_model1/trained.h5ad
-    pyrovelocity_data_path: models/pancreas_model1/pyrovelocity.pkl
-    metrics_path: models/pancreas_model1/metrics.json
-    run_info_path: models/pancreas_model1/run_info.json
-    vector_field_parameters:
-      basis: umap
-    training_parameters:
-      _target_: pyrovelocity.api.train_model
-      _partial_: true
-      guide_type: auto_t0_constraint
-      model_type: auto
-      svi_train: false
-      batch_size: -1
-      train_size: 1.0
-      use_gpu: 0
-      likelihood: Poisson
-      num_samples: 30
-      log_every: 100
-      cell_state: clusters
-      patient_improve: 0.0001
-      patient_init: 45
-      seed: 99
-      lr: 0.01
-      max_epochs: 2000
-      include_prior: true
-      library_size: true
-      offset: false
-      input_type: raw
-      cell_specific_kinetics: null
-      kinetics_num: 2
-      loss_plot_path: models/pancreas_model1/loss_plot.png
+      #pancreas_model1:
+      #  path: models/pancreas_model1
+      #  model_path: models/pancreas_model1/model
+      #  input_data_path: data/processed/pancreas_processed.h5ad
+      #  trained_data_path: models/pancreas_model1/trained.h5ad
+      #  pyrovelocity_data_path: models/pancreas_model1/pyrovelocity.pkl
+      #  metrics_path: models/pancreas_model1/metrics.json
+      #  run_info_path: models/pancreas_model1/run_info.json
+      #  vector_field_parameters:
+      #    basis: umap
+      #  training_parameters:
+      #    _target_: pyrovelocity.api.train_model
+      #    _partial_: true
+      #    guide_type: auto_t0_constraint
+      #    model_type: auto
+      #    svi_train: false
+      #    batch_size: -1
+      #    train_size: 1.0
+      #    use_gpu: 0
+      #    likelihood: Poisson
+      #    num_samples: 30
+      #    log_every: 100
+      #    cell_state: clusters
+      #    patient_improve: 0.0001
+      #    patient_init: 45
+      #    seed: 99
+      #    lr: 0.01
+      #    max_epochs: 2000
+      #    include_prior: true
+      #    library_size: true
+      #    offset: false
+      #    input_type: raw
+      #    cell_specific_kinetics: null
+      #    kinetics_num: 2
+      #    loss_plot_path: models/pancreas_model1/loss_plot.png
   pancreas_model2:
     path: models/pancreas_model2
     model_path: models/pancreas_model2/model
@@ -707,20 +707,20 @@ reports:
       vector_field_plot: reports/pbmc10k_model2/vector_field.pdf
       biomarker_selection_plot: reports/pbmc10k_model2/markers_selection_scatterplot.tif
       biomarker_phaseportrait_plot: reports/pbmc10k_model2/markers_phaseportrait.pdf
-  figure2:
-    tag: fig2
-    path: reports/fig2
-    tif_path: reports/fig2/fig2_raw_gene_selection_model1.tif
-    svg_path: reports/fig2/fig2_raw_gene_selection_model1.svg
-    biomarker_selection_path: reports/fig2/fig2_markers_selection_scatterplot.tif
-    biomarker_phaseportrait_path: reports/fig2/fig2_markers_phaseportrait.pdf
-    uncertainty_param_plot_path: reports/fig2/fig2_param_uncertainties.pdf
-    uncertainty_magnitude_plot_path: reports/fig2/fig2_magnitude_uncertainties.pdf
-    pancreas_model1:
-      shared_time_plot: reports/fig2/fig2_pancreas_shared_time.pdf
-      volcano_plot: reports/fig2/fig2_pancreas_volcano.pdf
-      rainbow_plot: reports/fig2/fig2_pancreas_rainbow.pdf
-      vector_field_plot: reports/fig2/fig2_pancreas_vector_field.pdf
+      #figure2:
+      #  tag: fig2
+      #  path: reports/fig2
+      #  tif_path: reports/fig2/fig2_raw_gene_selection_model1.tif
+      #  svg_path: reports/fig2/fig2_raw_gene_selection_model1.svg
+      #  biomarker_selection_path: reports/fig2/fig2_markers_selection_scatterplot.tif
+      #  biomarker_phaseportrait_path: reports/fig2/fig2_markers_phaseportrait.pdf
+      #  uncertainty_param_plot_path: reports/fig2/fig2_param_uncertainties.pdf
+      #  uncertainty_magnitude_plot_path: reports/fig2/fig2_magnitude_uncertainties.pdf
+      #  pancreas_model1:
+      #    shared_time_plot: reports/fig2/fig2_pancreas_shared_time.pdf
+      #    volcano_plot: reports/fig2/fig2_pancreas_volcano.pdf
+      #    rainbow_plot: reports/fig2/fig2_pancreas_rainbow.pdf
+      #    vector_field_plot: reports/fig2/fig2_pancreas_vector_field.pdf
   figure2_extras:
     shared_time_plot: reports/fig2/fig2_pancreas_pbmc_uncertainties_comparison.pdf
   figureS3:

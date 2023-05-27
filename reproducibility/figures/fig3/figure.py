@@ -526,11 +526,11 @@ def plots(conf: DictConfig, logger: Logger) -> None:
         "Pyro-Velocity cosine similarity: %.2f" % pyro_all_cos_mean, fontsize=7
     )
 
-    for a in ax2[3:6]:
-        pos = a.get_position()
-        a.text(
-            pos.x0+pos.width*0.06, pos.y0-pos.height/13, "unspliced expression", size=7, va="center"
-        )
+    #for a in ax2[3:6]:
+    #    pos = a.get_position()
+    #    a.text(
+    #        pos.x0+pos.width*0.06, pos.y0-pos.height/13, "unspliced expression", size=7, va="center"
+    #    )
 
     scv.pl.scatter(
         adata_cospar,

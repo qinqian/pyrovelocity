@@ -512,12 +512,12 @@ def plot_parameter_posterior_distributions(
         )
 
 
-def extended_time_model(expand_time_span: int = 100, grid_cells: int = 1000):
+def extended_time_model(u_obs, s_obs, *, expand_time_span: int = 1000):
     """ a sampler that use all the parameters of pyrovelocity 
     except the cell_time, we replaced the cell_time with a 
     grid points of time.
     """
-    expanded_time_plate = pyro.plate("new_grid_cells", grid_cells, dim=-2)
+    expanded_time_plate = pyro.plate("new_grid_cells", u_obs.shape[0], dim=-2)
     gene_plate = pyro.plate("genes", 2000, dim=-1)
     with gene_plate, poutine.mask(mask=True):
         alpha = pyro.sample("alpha", LogNormal(0, 1))
@@ -528,7 +528,6 @@ def extended_time_model(expand_time_span: int = 100, grid_cells: int = 1000):
         t0 = pyro.sample("t0", Normal(0, 1))
         u_scale = pyro.sample("u_scale", LogNormal(0, 0.1))
         s_scale = u_scale.new_ones(1)
-
         dt_switching = pyro.sample("dt_switching", LogNormal(0, 0.1))
         u_inf, s_inf = mRNA(dt_switching, u0, s0, alpha, beta, gamma)
         u_inf = pyro.deterministic("u_inf", u_inf, event_dim=0)
@@ -540,7 +539,8 @@ def extended_time_model(expand_time_span: int = 100, grid_cells: int = 1000):
         )
 
     with expanded_time_plate:
-        t = pyro.deterministic("expanded_cell_time", torch.linspace(0, expand_time_span, expanded_time_plate.size))
+        # turn shared time to be deterministic
+        t = pyro.deterministic("expanded_cell_time", torch.linspace(-expand_time_span, expand_time_span, expanded_time_plate.size))
         t = t.unsqueeze(-1)
         print(t)
         print(t.shape)
@@ -563,7 +563,6 @@ def extended_time_model(expand_time_span: int = 100, grid_cells: int = 1000):
             ut = ut * u_scale / s_scale
             print(ut)
             print(st)
-            print('-------')
             ut = relu(ut) + 1e-6
             st = relu(st) + 1e-6
             print(ut)
@@ -574,7 +573,40 @@ def extended_time_model(expand_time_span: int = 100, grid_cells: int = 1000):
 
 
 def extrapolate_time_phase_portrait_curve():
-    return
+    adata = scv.read(trained_data_path)
+    pyro.clear_param_store()
+    PyroVelocity.setup_anndata(adata)
+    model = PyroVelocity(adata)
+    print(pyrovelocity_model_path)
+    model = model.load_model(pyrovelocity_model_path, adata, use_gpu=0)
+    from pyro.infer import MCMC, NUTS, Predictive
+
+    predictive_svi = Predictive(extended_time_model, guide=model._guide, num_samples=20)()
+    ###posterior_samples = model.generate_posterior_samples(model.adata, num_samples=21)
+    #print(posterior_samples.keys())
+    #print(posterior_samples["st"].shape)
+    #print(posterior_samples["ut"].shape)
+    ##for figi, gene in enumerate(['Iapp', 'Cpe', 'Pcsk2', 'Tmem27', 'Ins1', 'Ins2']):
+    #for figi, gene in enumerate(model.adata.var_names[:5]):
+    #    (index,) = np.where(adata.var_names == gene)
+    #    fig, ax = plt.subplots(4, 5)
+    #    fig.set_size_inches(18, 12)
+    #    ax = ax.flatten()
+    #    for sample in range(20):
+    #        ax[sample].scatter(posterior_samples["st"][sample][:,index[0]], 
+    #                           posterior_samples["ut"][sample][:,index[0]], s=1.5, linewidth=0, color='r')
+    #        ax[sample].set_title(f"{gene} model 2 sample {sample}")
+    #        ax[sample].set_xlim(0, np.max(posterior_samples["st"][:, :, index[0]])*1.1)
+    #        ax[sample].set_ylim(0, np.max(posterior_samples["ut"][:, :, index[0]])*1.1)
+    #    fig.tight_layout()
+    #    fig.savefig(
+    #        f"fig{figi}_test.png",
+    #        facecolor=fig.get_facecolor(),
+    #        bbox_inches="tight",
+    #        edgecolor="none",
+    #        dpi=300,
+    #    )
+    #return
 
 
 def plots(conf: DictConfig, logger: Logger) -> None:
@@ -595,6 +627,7 @@ def plots(conf: DictConfig, logger: Logger) -> None:
         data_model_conf = conf.model_training[data_model]
         cell_state = data_model_conf.training_parameters.cell_state
         trained_data_path = data_model_conf.trained_data_path
+        print(trained_data_path)
         pyrovelocity_data_path = data_model_conf.pyrovelocity_data_path
         posterior_samples_data_path = data_model_conf.posterior_samples_path
 
@@ -643,6 +676,7 @@ def plots(conf: DictConfig, logger: Logger) -> None:
         # adata = rename_anndata_genes(adata, gene_mapping)
 
         pyrovelocity_model_path = data_model_conf.model_path
+        print(pyrovelocity_model_path)
         PyroVelocity.setup_anndata(adata)
         model = PyroVelocity(adata)
         print(pyrovelocity_model_path)
